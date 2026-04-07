@@ -41,16 +41,20 @@
       font-weight: bold;
       margin-top: 15px;
     }
+
+    #score {
+      margin-top: 10px;
+      font-size: 18px;
+    }
   </style>
 </head>
 
 <body>
 
 <h1>🎣 Guess the Fish</h1>
-
 <p>Type the name of the fish shown below:</p>
 
-<img id="fishImage" src="">
+<img id="fishImage" src="" alt="Fish Image">
 
 <br>
 
@@ -62,34 +66,37 @@
 <button onclick="nextFish()">Next Fish</button>
 
 <p id="result"></p>
-<p id="score"></p>
+<p id="score">Score: 0</p>
 
 <script>
 
+// ✅ RELIABLE IMAGE LINKS (WILL WORK)
 let fish = [
   {
     name: "bass",
-    img: "https://images.unsplash.com/photo-1598514982523-6d9c3b0c7c8e"
+    img: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Largemouth_bass.jpg"
   },
   {
     name: "trout",
-    img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5"
+    img: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Salmo_trutta.jpg"
   },
   {
     name: "catfish",
-    img: "https://images.unsplash.com/photo-1601758173926-196e4a67b9d0"
+    img: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Channel_catfish.jpg"
   }
 ];
 
 let current = 0;
 let score = 0;
 
+// Load first fish
 function loadFish() {
   document.getElementById("fishImage").src = fish[current].img;
   document.getElementById("result").innerText = "";
   document.getElementById("guess").value = "";
 }
 
+// Check answer
 function checkAnswer() {
   let guess = document.getElementById("guess").value.trim().toLowerCase();
 
@@ -97,12 +104,13 @@ function checkAnswer() {
     document.getElementById("result").innerText = "✅ Correct!";
     score++;
   } else {
-    document.getElementById("result").innerText = "❌ Incorrect. Try again or click Next.";
+    document.getElementById("result").innerText = "❌ Try again!";
   }
 
   document.getElementById("score").innerText = "Score: " + score;
 }
 
+// Next fish
 function nextFish() {
   current++;
 
@@ -115,7 +123,7 @@ function nextFish() {
   loadFish();
 }
 
-// Load first fish when page opens
+// Start game
 loadFish();
 
 </script>
