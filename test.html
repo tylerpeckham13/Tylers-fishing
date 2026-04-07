@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Test Fish Game</h2>
+
+<img id="fishImage" width="300">
+
+<br><br>
+
+<input id="guess">
+<button onclick="check()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+
+let fish = [
+  {
+    name: "bass",
+    img: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Largemouth_bass.jpg"
+  }
+];
+
+function load() {
+  document.getElementById("fishImage").src = fish[0].img;
+}
+
+function check() {
+  let guess = document.getElementById("guess").value.toLowerCase();
+
+  if (guess === "bass") {
+    document.getElementById("result").innerText = "Correct!";
+  } else {
+    document.getElementById("result").innerText = "Wrong!";
+  }
+}
+
+load();
+
+</script>
+
+</body>
+</html>
