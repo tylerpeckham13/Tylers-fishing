@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Fish</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f5f7fa;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #0d3b66;
+    }
+
+    img {
+      width: 300px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    input {
+      padding: 10px;
+      margin-top: 15px;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0d3b66;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🎣 Guess the Fish</h1>
+
+<p>Type the name of the fish shown below:</p>
+
+<img id="fishImage" src="">
+
+<br>
+
+<input id="guess" placeholder="Enter fish name">
+
+<br>
+
+<button onclick="checkAnswer()">Submit</button>
+<button onclick="nextFish()">Next Fish</button>
+
+<p id="result"></p>
+<p id="score"></p>
+
+<script>
+
+let fish = [
+  {
+    name: "bass",
+    img: "https://images.unsplash.com/photo-1598514982523-6d9c3b0c7c8e"
+  },
+  {
+    name: "trout",
+    img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5"
+  },
+  {
+    name: "catfish",
+    img: "https://images.unsplash.com/photo-1601758173926-196e4a67b9d0"
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function loadFish() {
+  document.getElementById("fishImage").src = fish[current].img;
+  document.getElementById("result").innerText = "";
+  document.getElementById("guess").value = "";
+}
+
+function checkAnswer() {
+  let guess = document.getElementById("guess").value.trim().toLowerCase();
+
+  if (guess === fish[current].name) {
+    document.getElementById("result").innerText = "✅ Correct!";
+    score++;
+  } else {
+    document.getElementById("result").innerText = "❌ Incorrect. Try again or click Next.";
+  }
+
+  document.getElementById("score").innerText = "Score: " + score;
+}
+
+function nextFish() {
+  current++;
+
+  if (current >= fish.length) {
+    document.getElementById("result").innerText = "🎉 Game Over!";
+    document.getElementById("fishImage").style.display = "none";
+    return;
+  }
+
+  loadFish();
+}
+
+// Load first fish when page opens
+loadFish();
+
+</script>
+
+</body>
+</html>
